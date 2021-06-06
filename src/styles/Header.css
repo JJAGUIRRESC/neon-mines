@@ -1,0 +1,36 @@
+.app-header {
+    background-color: #282c34;
+    height: 15vh;
+
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+
+    text-shadow:0 0 5px #fff;
+
+    box-shadow:0 0 18px rgb(35 173 255);
+}
+  
+.header-neon {
+    font-size: 3.5rem;
+    color: #fff;
+
+    animation: header-neon 0.7s ease-in-out infinite alternate;
+}
+
+@keyframes header-neon {
+    from {
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 
+      0 0 30px #4cd4fa, 0 0 40px #4cd4fa, 0 0 50px #4cd4fa, 
+      0 0 60px #4cd4fa, 0 0 70px #4cd4fa;
+    }
+    
+    to {
+      text-shadow: 0 0 20px #fff, 0 0 30px #61dafb, 
+      0 0 40px #61dafb, 0 0 50px #61dafb, 
+      0 0 60px #61dafb, 0 0 70px #61dafb, 0 0 80px #61dafb;
+    }
+}
