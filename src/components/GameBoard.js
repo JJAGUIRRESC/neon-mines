@@ -4,7 +4,7 @@ import BoardCell from "./BoardCell";
 import revealBlankCells from "../utils/revealBlankCells";
 import GameActionBar from "./GameActionBar";
 import BoardAudio from "./BoardAudio";
-import GameModeBar from "./GameModeBar";
+import CustomGameMode from "./CustomGameMode";
 
 function GameBoard() {
   const [grid, setGrid] = useState([]);
@@ -14,52 +14,45 @@ function GameBoard() {
   const [minesRemaining, setMinesRemaining] = useState(0);
   const [time, setTime] = useState(0);
   const [timeCounter, setTimeCounter] = useState(false);
+  const [colorBoard, setColorBoard] = useState("0 0 18px 2px rgb(35 173 255)");
+  const [boardSize, setBoardSize] = useState({ rows: 12, cols: 20, bombs: 25 });
 
   useEffect(() => {
     setBoard();
-  }, []);
+  }, [boardSize]);
 
   // Timer to count the seconds passed after start a new game
   useEffect(() => {
-      setTimeCounter(
-        setTimeout(() => {
-          let newTime = time + 1;
-          setTime(newTime);
-        }, 1000)
-      );
+    setTimeCounter(
+      setTimeout(() => {
+        let newTime = time + 1;
+        setTime(newTime);
+      }, 1000)
+    );
   }, [time]);
 
-  function setBoard(rows, cols, bombs) {
-    let rowsBoard, colsBoard, bombsBoard;
+  function restartGame(boardSize) {
+    setBoardSize(boardSize);
 
-    // Create a default board if the user dont use the inputs
-    if (typeof rows === "undefined") {
-      rowsBoard = 12;
-      colsBoard = 20;
-      bombsBoard = 25;
-    } else {
-      rowsBoard = rows;
-      colsBoard = cols;
-      bombsBoard = bombs;
-    }
-
-    const setBoard = createBoard(rowsBoard, colsBoard, bombsBoard);
-
-    // Number of cells withouth bombs
-    setNonMineCount(rowsBoard * colsBoard - bombsBoard);
-
-    setMineLocations(setBoard.mineLocation);
-    setGrid(setBoard.board);
-    setMinesRemaining(bombsBoard);
-  }
-
-  function restartGame(rows, cols, bombs) {
-    //setResetCount(true);
-    setBoard(rows, cols, bombs);
+    setBoard();
     setGameOver(false);
 
     clearInterval(timeCounter);
     setTime(0);
+  }
+
+  function setBoard() {
+
+    // Create the new board
+    const setBoard = createBoard(boardSize.rows, boardSize.cols, boardSize.bombs);
+
+    // Number of cells withouth bombs
+    setNonMineCount(boardSize.rows * boardSize.cols - boardSize.bombs);
+    setColorBoard("0 0 18px 2px rgb(35 173 255)");
+
+    setMineLocations(setBoard.mineLocation);
+    setGrid(setBoard.board);
+    setMinesRemaining(boardSize.bombs);
   }
 
   // Put a flag into the board grid
@@ -106,6 +99,11 @@ function GameBoard() {
         newGrid[mineLocations[i][0]][mineLocations[i][1]].revealed = true;
       }
 
+      // Image for the exploded bomb
+      newGrid[x][y].value = "💥";
+
+      setColorBoard("0 0 18px 2px rgb(246 60 60)");
+
       // Set the grid to show to the user the location of all the mines
       setGrid(newGrid);
       setGameOver(true);
@@ -113,16 +111,16 @@ function GameBoard() {
 
       // If the game finish, stop the time counter
       clearInterval(timeCounter);
-
     } else {
       let newRevealedBoard = revealBlankCells(newGrid, x, y, nonMineCount);
       setGrid(newRevealedBoard.boardGrid);
       setNonMineCount(newRevealedBoard.newNonMinesCount);
 
+      // If not find any bomb, the user win the game
       if (newRevealedBoard.newNonMinesCount === 0) {
         setGameOver(true);
-
         clearInterval(timeCounter);
+        setColorBoard("0 0 18px 2px rgb(90 255 87)");
       }
     }
   }
@@ -140,9 +138,11 @@ function GameBoard() {
             restartGame={restartGame}
             minesRemaining={minesRemaining}
             time={time}
+            colorBoard={colorBoard}
+            boardSize={boardSize}
           />
         }
-        <div className="game-board-inner-container">
+        <div style={{ boxShadow: colorBoard }}>
           {grid.map((singleRow, index1) => {
             return (
               <div style={{ display: "flex" }} key={index1}>
@@ -160,7 +160,7 @@ function GameBoard() {
             );
           })}
         </div>
-        <GameModeBar restartGame={restartGame} />
+        <CustomGameMode restartGame={restartGame} boardSize={boardSize} colorBoard={colorBoard} />
         <BoardAudio />
       </div>
     </div>

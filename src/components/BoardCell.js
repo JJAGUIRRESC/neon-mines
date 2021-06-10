@@ -2,7 +2,6 @@ import React from "react";
 import "../App.css";
 
 function BoardCell({ details, updateFlag, revealCell }) {
-
   const cellStyle = {
     background: details.revealed
       ? details.value === "X"
@@ -31,7 +30,6 @@ function BoardCell({ details, updateFlag, revealCell }) {
 }
 
 function setRevealedCellColor(x, y) {
-
   if (x % 2 === 0 && y % 2 === 0) {
     return "#e6e6e6";
   } else if (x % 2 === 0 && y % 2 !== 0) {
