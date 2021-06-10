@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import '../styles/BoardCell.css';
 
 function BoardCell({ details, updateFlag, revealCell }) {
   const cellStyle = {
@@ -16,7 +16,7 @@ function BoardCell({ details, updateFlag, revealCell }) {
       onContextMenu={(e) => updateFlag(e, details.x, details.y)}
       onClick={() => revealCell(details.x, details.y)}
       style={cellStyle}
-      className="cellStyle"
+      className="cell-style"
     >
       {!details.revealed && details.flagged
         ? "🚩"

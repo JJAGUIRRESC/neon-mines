@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import GameBoard from './components/GameBoard';
+import Header from './components/Header';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div className="neon-mines-app">
+      <Header />
+      <GameBoard />
+    </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

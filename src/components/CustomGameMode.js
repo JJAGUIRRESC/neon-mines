@@ -6,8 +6,8 @@ class CustomGameMode extends React.Component {
     super(props);
 
     this.state = {
-      rows: 5,
-      cols: 5,
+      rows: 10,
+      cols: 10,
       bombs: 5,
     };
   }
@@ -24,7 +24,7 @@ class CustomGameMode extends React.Component {
 
     } else if (this.state.bombs > 30 || this.state.bombs < 5) {
       return alert("Error, los valores deben estar entre 5 y 30.");
-      
+
     } else {
       let boardSize = {
         rows: this.state.rows,
@@ -91,6 +91,7 @@ class CustomGameMode extends React.Component {
               type="number"
               name="rows"
               className="input-numbers"
+              value="10"
               placeholder="Filas"
               onChange={this.myChangeHandler}
             />
@@ -98,6 +99,7 @@ class CustomGameMode extends React.Component {
               type="number"
               name="cols"
               className="input-numbers"
+              value="10"
               placeholder="Columnas"
               onChange={this.myChangeHandler}
             />
@@ -105,6 +107,7 @@ class CustomGameMode extends React.Component {
               type="number"
               name="bombs"
               className="input-numbers"
+              value="5"
               placeholder="Minas"
               onChange={this.myChangeHandler}
             />

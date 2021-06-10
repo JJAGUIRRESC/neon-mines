@@ -5,6 +5,7 @@ import revealBlankCells from "../utils/revealBlankCells";
 import GameActionBar from "./GameActionBar";
 import BoardAudio from "./BoardAudio";
 import CustomGameMode from "./CustomGameMode";
+import "../styles/GameBoard.css";
 
 function GameBoard() {
   const [grid, setGrid] = useState([]);
