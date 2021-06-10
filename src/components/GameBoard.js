@@ -14,7 +14,7 @@ function GameBoard() {
   const [minesRemaining, setMinesRemaining] = useState(0);
   const [time, setTime] = useState(0);
   const [timeCounter, setTimeCounter] = useState(false);
-  const [colorBoard, setColorBoard] = useState("0 0 18px 2px rgb(35 173 255)");
+  const [colorBoard, setColorBoard] = useState("0 0 18px 0px rgb(35 173 255)");
   const [boardSize, setBoardSize] = useState({ rows: 12, cols: 20, bombs: 25 });
 
   useEffect(() => {

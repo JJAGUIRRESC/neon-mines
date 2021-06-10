@@ -9,6 +9,11 @@ input {
     border-radius: 15px;
 }
 
+.input-numbers {
+    position: relative;
+    z-index: 10000;
+}
+
 .container-game-mode {
     display: flex;
     flex-direction: row;
@@ -21,7 +26,7 @@ input {
 form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-content: space-between;
     align-items: center;
     height: 55px;
@@ -38,13 +43,13 @@ form {
     height: 25px;
     font-size: 16px;
     background-color: #cce6ff;
-    height: 60%;
+    height: 50%;
 }
 
 .btn-submit:hover {
     min-width: 100%;
     height: 25px;
-    height: 60%;
+    height: 50%;
     font-size: 16px;
     background-color: #e6f3ff;
 }
@@ -52,7 +57,7 @@ form {
 .game-mode-display {
     height: 55px;
     background-color: #cce6ff;
-    min-width: 160px;
+    min-width: 150px;
     font-size: 25px;
     font-weight: bold;
 
@@ -61,19 +66,21 @@ form {
     align-items: center;
     justify-content: space-around;
 
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .btn-game-mode {
-    width: 160px;
+    width: 150px;
     height: 55px;
     font-size: 25px;
     background-color: #cce6ff;
+    border-radius: 15px;
 }
 
 .btn-game-mode:hover {
-    width: 160px;
+    width: 150px;
     height: 55px;
     font-size: 25px;
     background-color: #e6f3ff;
+    border-radius: 15px;
 }
